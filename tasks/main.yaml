@@ -1,0 +1,17 @@
+---
+- name: "Fail if OS/Architecture is not supported"
+  fail:
+    msg: "Installing lobalancer on {{ (ansible_os_family | lower) + '_' + (ansible_architecture | lower) }} is unsupported."
+  when:
+    - "(install_lobalancer_packages | default({}))[(ansible_os_family | lower) + '_' + (ansible_architecture | lower)] is not defined"
+    - "lobalancer is defined"
+  tags:
+    - "lobalancer"
+- name: "Install lobalancer"
+  package:
+    pkg: "{{ install_lobalancer_packages[(ansible_os_family | lower) + '_' + (ansible_architecture | lower)] }}"
+    state: "present"
+  when:
+    - "lobalancer is defined"
+  tags:
+    - "lobalancer"
