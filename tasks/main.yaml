@@ -4,12 +4,6 @@
     dest: "{{ item.dest }}"
     src:  "{{ (item.dest | basename ()) + '.j2' }}"
     mode: "{{ item.mode | default('0644') }}"
-  with_items:
-    - dest: "/usr/local/bin/lobalancer"
-      mode: "0755"
-    - dest: "/etc/systemd/system/lobalancer@.timer"
-    - dest: "/etc/systemd/system/lobalancer@.service"
-  when:
-    - lobalancer is defined
+  with_items: "{{ install_lobalancer_templates[(ansible_os_family | lower) + '_' + (ansible_architecture | lower)] }}"
   tags:
     - lobalancer
