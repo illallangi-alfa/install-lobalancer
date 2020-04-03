@@ -1,9 +1,9 @@
 ---
 install_lobalancer_templates:
-  common: &common
+  debian: &debian
     - dest: "/usr/local/bin/lobalancer"
       mode: "0755"
     - dest: "/etc/systemd/system/lobalancer@.timer"
     - dest: "/etc/systemd/system/lobalancer@.service"
-  debian_armv7l: *common
-  redhat_x86_64: *common
+  debian_armv7l: *debian
+  debian_x86_64: *debian
