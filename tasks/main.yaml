@@ -1,4 +1,11 @@
 ---
+- name: "Install lobalancer"
+  pip:
+    name: "{{ install_lobalancer_packages[(ansible_os_family | lower) + '_' + (ansible_architecture | lower)] }}"
+  tags:
+    - "lobalancer"
+  notify: "lobalancer-restart"
+
 - name: "Apply Templates"
   template:
     dest: "{{ item.dest }}"
@@ -7,3 +14,5 @@
   with_items: "{{ install_lobalancer_templates[(ansible_os_family | lower) + '_' + (ansible_architecture | lower)] }}"
   tags:
     - lobalancer
+  notify: "lobalancer-restart"
+

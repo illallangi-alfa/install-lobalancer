@@ -1,9 +1,12 @@
 ---
+install_lobalancer_packages:
+  debian: &debian_packages
+  - git+https://github.com/illallangi/LoBalancer@master
+  debian_armv7l: *debian_packages
+  debian_x86_64: *debian_packages
+
 install_lobalancer_templates:
-  debian: &debian
-    - dest: "/usr/local/bin/lobalancer"
-      mode: "0755"
-    - dest: "/etc/systemd/system/lobalancer@.timer"
+  debian: &debian_templates
     - dest: "/etc/systemd/system/lobalancer@.service"
-  debian_armv7l: *debian
-  debian_x86_64: *debian
+  debian_armv7l: *debian_templates
+  debian_x86_64: *debian_templates

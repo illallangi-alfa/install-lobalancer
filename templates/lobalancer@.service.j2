@@ -4,7 +4,6 @@ After=network.target
 AssertFileNotEmpty=/etc/sysconfig/lobalancer@%i.env
 
 [Service]
-Type=oneshot
 EnvironmentFile=/etc/sysconfig/lobalancer@%i.env
 ExecStart=/usr/local/bin/lobalancer
 StandardOutput=journal
